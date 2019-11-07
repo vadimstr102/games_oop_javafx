@@ -27,8 +27,18 @@ public class Logic {
         if (index != -1) {
             Cell[] steps = this.figures[index].way(source, dest);
             if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
+                for (Cell cell: steps) {
+                    int i = this.findBy(cell);
+                    if (i == -1) {
+                        rst = true;
+                    } else {
+                        rst = false;
+                        break;
+                    }
+                }
+                if (rst == true) {
+                    this.figures[index] = this.figures[index].copy(dest);
+                }
             }
         }
         return rst;
